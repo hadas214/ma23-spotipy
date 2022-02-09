@@ -7,6 +7,6 @@ class Artist:
         self.name = name
         self.albums = albums
 
-    def add_song(self, new_album: album.Album):
+    def add_album(self, new_album: album.Album):
         self.albums.append(new_album)
 
