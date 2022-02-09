@@ -6,4 +6,4 @@ class Spotipy:
         self.artist = {}
 
     def add_artist(self, new_artist: artist.Artist):
-        self.artist.append(new_artist)
+        self.artist[new_artist.id] = new_artist.name
