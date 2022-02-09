@@ -4,5 +4,5 @@ from abc import ABC, abstractmethod
 class Parser(ABC):
 
     @abstractmethod
-    def parse(self):
+    def parse(self, parse_value: str):
         pass
