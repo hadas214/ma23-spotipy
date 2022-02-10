@@ -1,5 +1,5 @@
 from ETL import load_properties
-from ETL import converter
+from ETL import transform
 from ETL import reader_file
 
 
@@ -10,7 +10,7 @@ def main():
     # read the folder that contains all the json files and load them
     r = reader_file.Reader()
 
-    c = converter.Converter()
+    c = transform.Transform()
     data = r.parse(folder)
     c.parse(data)
     # print(c.application.artists.keys())

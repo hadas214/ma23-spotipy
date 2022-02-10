@@ -2,7 +2,7 @@ from ETL import config_parser
 from setup import song, album, artist, spotipy
 
 
-class Converter(config_parser.Parser):
+class Transform(config_parser.Parser):
     def __init__(self):
         self.application = spotipy.Spotipy()
 
@@ -25,9 +25,9 @@ class Converter(config_parser.Parser):
                 artist_id = item.get("id")
                 artist_name = item.get("name")
 
-                # מקרה שהזמר נמצא כבר במאגר
+                # For case if the artist is already exists in storage (self.application)
                 if artist_id in self.application.artists.keys():
-                    # צריך לבדוק אם האלבום קיים כבר או שזה אלבום חדש
+                    # Need to check if it is new album or the album is already exists
                     if not self.application.artists.get(artist_id).check_album(current_album):
                         self.application.artists.get(artist_id).add_album(current_album)
                 else:
@@ -35,10 +35,6 @@ class Converter(config_parser.Parser):
                     new_album[current_album.id] = current_album
                     current_artist = artist.Artist(artist_id, artist_name, new_album)
                     self.application.add_artist(current_artist)
-                    # print(self.application.artists)
-                    # print(artist_id)
-                    # print(self.application.artists.get(artist_id).albums)
-                    # self.application.artists.get(artist_id).add_album(my_album)
                     print(self.application.artists.get(artist_id).albums)
                 self.application.artists.get(artist_id).albums.get(current_album.id).add_song(current_song)
 
