@@ -14,7 +14,7 @@ def main():
     c = transform.Transform()
     data = r.parse(folder)
     c.parse(data)
-    # print(c.application.artists.keys())
+    print(c.application.artists.keys())
 
     # print specific name of artist by artist_id
     print(c.application.artists.get('6uQl3gu1AIXyvqCAxnc2q4').name)
