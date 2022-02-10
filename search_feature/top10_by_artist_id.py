@@ -18,7 +18,3 @@ class Top10_by_artist_id(search.Search):
         limit_songs = int(limit_songs)
         top10_songs = dict(list(sort_songs_by_popularity.items())[:limit_songs])
         return top10_songs
-
-
-s = Top10_by_artist_id()
-print(s.search("3EOEK57CV77D4ovYVcmiyt"))
