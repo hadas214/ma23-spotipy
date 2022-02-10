@@ -15,7 +15,3 @@ class Top10_by_artist_id(search.Search):
         sort_songs_by_popularity = dict(sorted(songs_names.items(), key=operator.itemgetter(0), reverse=True))
         top10_songs = dict(list(sort_songs_by_popularity.items())[:10])
         return top10_songs
-
-
-s = Top10_by_artist_id()
-print(s.search("3EOEK57CV77D4ovYVcmiyt"))
