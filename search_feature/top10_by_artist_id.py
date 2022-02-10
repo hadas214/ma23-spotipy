@@ -1,6 +1,7 @@
 import operator
 
 from search_feature import search
+from ETL import load_properties
 
 
 class Top10_by_artist_id(search.Search):
@@ -13,5 +14,7 @@ class Top10_by_artist_id(search.Search):
                 print(song.name)
                 songs_names[song.popularity] = song
         sort_songs_by_popularity = dict(sorted(songs_names.items(), key=operator.itemgetter(0), reverse=True))
-        top10_songs = dict(list(sort_songs_by_popularity.items())[:10])
+        limit_songs = load_properties.Loader.load_properties(self.property_file, "limit.songs")
+        limit_songs = int(limit_songs)
+        top10_songs = dict(list(sort_songs_by_popularity.items())[:limit_songs])
         return top10_songs

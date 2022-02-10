@@ -8,7 +8,8 @@ from playlist_feature import playlist, user
 class Search:
     def __init__(self):
         # load property, search after value that called folder.songs in the property
-        folder = load_properties.Loader.load_properties(r'C:\ma23\Spotipy\properties.properties', 'folder.songs')
+        self.property_file = r'C:\ma23\Spotipy\properties.properties'
+        folder = load_properties.Loader.load_properties(self.property_file, 'folder.songs')
 
         # read the folder that contains all the json files and load them
         reader = reader_file.Reader()
