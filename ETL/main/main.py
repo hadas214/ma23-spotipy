@@ -1,6 +1,7 @@
 from ETL import load_properties
 from ETL import transform
 from ETL import reader_file
+from playlist_feature import playlist, user
 
 
 def main():
@@ -14,15 +15,33 @@ def main():
     data = r.parse(folder)
     c.parse(data)
     # print(c.application.artists.keys())
+
+    # print specific name of artist by artist_id
     print(c.application.artists.get('6uQl3gu1AIXyvqCAxnc2q4').name)
-    albums1 = c.application.artists.get('6uQl3gu1AIXyvqCAxnc2q4').albums
-    for b in albums1.values():
-        print(b.name)
-    print(c.application.artists.get('1IAEef07H0fd9aA8aUHUlL').name)
-    print(c.application.artists.get('1IAEef07H0fd9aA8aUHUlL').albums)
-    albums2 = c.application.artists.get('1IAEef07H0fd9aA8aUHUlL').albums
-    for b in albums2.values():
-        print(b.name)
+
+    hadas_user = user.User()
+    hadas_user.add_playlist("pop")
+    print(hadas_user.playlists)
+
+    # print all the songs of this artist
+    albums = c.application.artists.get('6uQl3gu1AIXyvqCAxnc2q4').albums
+    for album in albums.values():
+        for element in album.songs.values():
+            hadas_user.add_song("pop", element)
+
+    # print specific name of artist by artist_id
+    print(c.application.artists.get("5BtHciL0e0zOP7prIHn3pP").name)
+    print(c.application.artists.get("5BtHciL0e0zOP7prIHn3pP").albums)
+    # print all the songs of this artist
+    albums = c.application.artists.get("5BtHciL0e0zOP7prIHn3pP").albums
+    for album in albums.values():
+        for element in album.songs.values():
+            hadas_user.add_song("pop", element)
+
+    playlists = hadas_user.playlists.get("pop")
+    print(playlists.songs)
+    for p in playlists.songs:
+        print(p.name)
 
 
 if __name__ == '__main__':

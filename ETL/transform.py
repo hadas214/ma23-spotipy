@@ -30,11 +30,14 @@ class Transform(config_parser.Parser):
                     # Need to check if it is new album or the album is already exists
                     if not self.application.artists.get(artist_id).check_album(current_album):
                         self.application.artists.get(artist_id).add_album(current_album)
+                    self.application.artists.get(artist_id).albums.get(current_album.id).add_song(current_song)
                 else:
+                    new_song = {}
+                    new_song[current_song.id] = current_song
+                    current_album1 = album.Album(album_id, album_name, new_song)
                     new_album = {}
-                    new_album[current_album.id] = current_album
+                    new_album[current_album.id] = current_album1
                     current_artist = artist.Artist(artist_id, artist_name, new_album)
                     self.application.add_artist(current_artist)
-                    print(self.application.artists.get(artist_id).albums)
-                self.application.artists.get(artist_id).albums.get(current_album.id).add_song(current_song)
+                    # print(self.application.artists.get(artist_id).albums)
 

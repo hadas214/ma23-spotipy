@@ -8,4 +8,5 @@ class Album:
         self.songs = songs
 
     def add_song(self, new_song: song.Song):
-        self.songs[new_song.id] = new_song
+        current_song = song.Song(new_song.name, new_song.id, new_song.popularity)
+        self.songs[current_song] = current_song
